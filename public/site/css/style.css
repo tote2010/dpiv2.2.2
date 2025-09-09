@@ -1,0 +1,496 @@
+/* tipografia */
+
+@font-face {
+    font-family: 'windsor_handregular';
+    src: url('../font/windsor-hand-webfont.eot');
+    src: url('../font/windsor-hand-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/windsor-hand-webfont.woff2') format('woff2'),
+         url('../font/windsor-hand-webfont.woff') format('woff'),
+         url('../font/windsor-hand-webfont.ttf') format('truetype'),
+         url('../font/windsor-hand-webfont.svg#windsor_handregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* estilos generales */
+
+.clearFix {
+    clear: both;
+    height: 0;
+}
+
+/* header */
+
+.mainHeader {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+.mainNavbar {
+    background-color: #000000;
+    background-color: rgba(0,0,0,1);
+}
+
+.contenedorNavHeader {
+    padding-top: 18px;
+}
+
+/* logo */
+
+.logoMainHeader {
+    width: 100%;
+    max-width: 254px;
+    opacity: 1;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.logoMainHeader:hover {
+    opacity: .7;
+}
+
+/* nav */
+
+.contenedorMainNav {
+    padding-top: 30px;
+}
+
+.itemMainNav {
+    font-size: 17px;
+    text-transform: uppercase;
+}
+
+.linkMainNav {
+    color: #FFFFFF;
+    color: rgba(255,255,255,1);
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    opacity: 1;
+}
+
+.linkMainNav:hover {
+    opacity: .7;
+}
+
+/* boton print online */
+
+.btnPrintOnline {
+    animation: color-animation 3s infinite;
+}
+
+.linkBtnPrintOnline {
+    color: #FFFFFF;
+    color: rgba(255,255,255,1);
+}
+
+ @keyframes color-animation {
+     
+     0% {
+         background-color: #e5007d;
+         background-color: rgba(229,0,125,1);
+     }
+     
+     33.2% {
+         background-color: #e5007d;
+         background-color: rgba(229,0,125,1);
+     }
+     
+     33.3% {
+         background-color: #439ad5;
+         background-color: rgba(67,154,213,1);
+     } 
+     
+     66.5% {
+         background-color: #439ad5;
+         background-color: rgba(67,154,213,1);
+     } 
+     
+     66.6% {
+         background-color: #f5e600;
+         background-color: rgba(245,230,0,1);
+     }
+     
+     100% {
+         background-color: #f5e600;
+         background-color: rgba(245,230,0,1);
+     }
+ }
+
+/* imagen de fondo */
+
+.spacerNavFixed {
+    height: 115px;
+}
+
+.bgMain {
+    background: url(../img/bg/bgMain.jpg) fixed no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+    height: 100vh;
+    background-position: 0 115px;
+}
+
+/* servicios */
+
+.contenedorServicios {
+    background-color: #000000;
+    background-color: rgba(0,0,0,1);
+    padding: 75px 0;
+}
+
+.listadoServicios {
+    list-style: none;
+    padding: 0;
+}
+
+.itemServicio {
+    text-align: center;
+    margin: 17px 0;
+}
+
+.imgServicios {
+    width: 100%;
+    max-width: 233px;
+}
+
+.txtServicios {
+    margin: 0;
+    color: #FFFFFF;
+    color: rgba(255,255,255,1);
+    text-transform: uppercase;
+    font-size: 17px;
+    line-height: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 300;
+}
+
+.btnPrecios {
+    color: #FFFFFF;
+    color: rgba(255,255,255,1);
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 6px 14px;
+    background-color: #439ad5;
+    background-color: rgba(67,154,213,1);
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.btnPrecios:hover {
+    background-color: #e5007d;
+    background-color: rgba(229,0,125,1);
+}
+
+/* modal precios */
+
+.imgModalPrecios {
+    width: 100%;
+}
+
+/* institucional */
+
+.fondoCelesteInstitucional {
+    background-color: #439ad5;
+    background-color: rgba(67,154,213,1);
+    padding: 145px 0;
+}
+
+.contenedorImgInstitucional {
+    
+}
+
+.imgInstitucional {
+    width: 100%;
+    max-width: 380px;
+}
+
+.txtInstitucional {
+    color: #FFFFFF;
+    color: rgba(255,255,255,1);
+    font-size: 17px;
+    text-transform: uppercase;
+}
+
+.tituloInstitucional {
+    font-family: 'windsor_handregular';
+    color: #FFFFFF;
+    color: rgba(255,255,255,1);
+    font-size: 130px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+/* como enviar */
+
+.bgComoEnviar {
+    background-color: #e5007d;
+    background-color: rgba(229,0,125,1);
+    padding: 90px 0;
+}
+
+.listadoComoEnviar {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contenedorInfoComoEnviar {
+    padding-bottom: 45px;
+}
+
+.contenedorInfoComoEnviar:last-child {
+    padding-bottom: 0;
+}
+
+.contenedorTituloInfoComoEnviar {
+    text-align: center;
+}
+
+.tituloInfoComoEnviar {
+    font-family: 'windsor_handregular';
+    color: #FFFFFF;
+    color: rgba(255,255,255,1);
+    font-size: 130px;
+    text-transform: uppercase;
+    line-height: 85px;
+    margin: 0;
+}
+
+.contenedorTxtInfoComoEnviar {
+    padding-top: 14px;
+}
+
+.txtInfoComoEnviar {
+    color: #FFFFFF;
+    color: rgba(255,255,255,1);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 16px;
+    padding: 0;
+    margin: 0;
+}
+
+/* contacto */
+
+.bgContacto {
+    background-color: #f5e600;
+    background-color: rgba(245,230,0,1);
+    padding: 90px 0;
+}
+
+/* mapa */
+
+.imgMapaContacto {
+    max-width: 380px;
+    width: 100%;
+}
+
+/* info contacto */
+
+.contenedorInfoContacto {
+    padding-top: 30px;
+}
+
+.tituloContacto {
+    font-family: 'windsor_handregular';
+    color: #000000;
+    color: rgba(0,0,0,1);
+    font-size: 130px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.txtContacto {
+    font-size: 30px;
+    color: #000000;
+    color: rgba(0,0,0,1);
+    text-transform: uppercase;
+    font-weight: 300;
+    line-height: 36px;
+    margin: 0;
+}
+
+.txtContacto a {
+    color: #000000;
+    color: rgba(0,0,0,1);
+}
+
+/* media query 992 */
+
+@media (min-width: 769px) and (max-width: 991px) {
+    
+    /* header */
+    
+    .contenedorNavHeader {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .contenedorMainNav {
+        padding-bottom: 14px;
+    }
+    
+    /* servicios */
+    
+    .listadoServicios .clearFix {
+        display: none;
+    }
+    
+    .itemServicio {
+        margin: 25px 0;
+    }
+    
+    /* contacto */
+    
+    .contenedorInfoContacto {
+        padding-top: 0;
+        position: relative;
+        top: -25px;
+    }   
+}
+
+/* ipads portrait y smartphones */
+
+@media (min-width: 320px) and (max-width: 768px) {
+    
+    /* logo */
+    
+    .logoMainHeader {
+        max-width: 150px;
+    }
+    
+    /* nav */
+    
+    .navbar {
+        min-height: 85px;
+    }
+    
+    .container > .navbar-header, .container-fluid > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-collapse {
+        margin-right: 0;
+        margin-left: 0;
+    }
+    
+    /* boton menu */
+    
+    .navbar-toggle .icon-bar {
+        background-color: #FFFFFF;
+        background-color: rgba(255,255,255,1);
+    }
+    
+    /* fondo principal */
+    
+    .bgMain {
+        background-position: 0 85px;
+    }
+    
+    /* servicios */
+    
+    .listadoServicios .clearFix {
+        display: none;
+    }
+    
+    .itemServicio {
+        margin: 25px 0;
+        min-height: 390px;
+    }
+    
+    /* institucional */
+    
+    .fondoCelesteInstitucional {
+        text-align: center;
+    }
+    
+    .contenedorTxtInstitucional {
+        margin-top: 20px;
+    }
+    
+    .tituloInstitucional {
+        line-height: 0.75;
+    }
+    
+    /* como enviar */
+    
+    .tituloInfoComoEnviar {
+        font-size: 90px;
+        line-height: 60px;
+    }
+    
+    /* contacto */
+    
+    .bgContacto {
+        text-align: center;
+    }
+}
+
+/* smartphones portrait */
+
+@media (min-width: 320px) and (max-width: 420px) {
+    
+    /* main img */
+    
+    .bgMain {
+        background-size: 100% auto;
+        -o-background-size: 100% auto;
+        -moz-background-size: 100% auto;
+        -webkit-background-size: 100% auto;
+        -ms-background-size: 100% auto;
+        height: 270px;
+    }
+    
+    /* servicios */
+    
+    .itemServicio {
+        min-height: 360px;
+    }
+    
+    /* institucional */
+    
+    .tituloInstitucional {
+        font-size: 90px;
+        line-height: 60px;
+    }
+    
+    /* como enviar */
+    
+    .contenedorTituloInfoComoEnviar {
+        width: 100% !important;
+    }
+    
+    .tituloInfoComoEnviar {
+        text-align: left;
+    }
+    
+    .tituloInfoComoEnviar br {
+        display: none;
+    }
+    
+    .contenedorTxtInfoComoEnviar {
+        width: 100% !important;
+    }
+    
+    /* contacto */
+    
+    .contenedorInfoContacto {
+        padding-top: 0;
+    }
+    
+    .tituloContacto {
+        font-size: 90px;
+    }
+    
+    .txtContacto {
+        font-size: 18px;
+        line-height: 24px;
+    }
+}
