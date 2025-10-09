@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Producto;
-use Illuminate\Support\Facades\Hash;
 
 class ProductoService
 {
@@ -14,23 +13,13 @@ class ProductoService
 
     public function create(array $data)
     {
-        $data['password'] = Hash::make($data['password']);
-        $user = Producto::create($data);
-        $user->syncRoles($data['roles'] ?? []);
-        return $user;
+        return Producto::create($data);
     }
 
-    public function update(Producto $user, array $data)
-    {
-        if (!empty($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        } else {
-            unset($data['password']);
-        }
-        
-        $user->update($data);
-        //$user->syncRoles($data['roles'] ?? []);
-        return $user;
+    public function update(Producto $producto, array $data)
+    {      
+        $producto->update($data);
+        return $producto;
     }
 
     public function toggleActive(Producto $producto)

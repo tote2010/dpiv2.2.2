@@ -15,7 +15,7 @@ class Producto extends Model
     protected $fillable = [
         'nombre',
         'categorias_id',
-        'comentario',
+        'comentarios',
     ];
 
     // Relaciones

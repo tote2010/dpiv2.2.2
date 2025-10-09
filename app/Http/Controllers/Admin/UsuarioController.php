@@ -166,10 +166,10 @@ class UsuarioController extends Controller
             return redirect()->route('admin.usuarios.index')
                 ->with('success', 'Usuario actualizado exitosamente');
         } catch (\Exception $e) {
-            // return redirect()->route('admin.usuarios.edit')
-            //     ->with('error', 'Error:' . $e->getMessage());
+            return redirect()->route('admin.usuarios.edit')
+                ->with('error', 'Error:' . $e->getMessage());
             Log::error($e->getMessage());
-            dd($e->getMessage());
+            //dd($e->getMessage());
         }
     }
 
