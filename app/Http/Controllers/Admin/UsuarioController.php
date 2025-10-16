@@ -149,7 +149,9 @@ class UsuarioController extends Controller
 
     public function edit(User $user)
     {
-        $rol = $user->getRoleNames();
+        //$rol = $user->getRoleNames();
+        $roles = ['Admin', 'Empleado']; // Ejemplo de roles
+        $rol = $this->userService->getUsersByRoles($roles);
         //dump($rol);
         // $roles = Role::all();
         // Aplica los filtros pasados en la solicitud

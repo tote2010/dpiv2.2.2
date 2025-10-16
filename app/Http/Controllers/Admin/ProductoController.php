@@ -37,12 +37,13 @@ class ProductoController extends Controller
         }
     }
 
-    
     public function store(ProductoStoreRequest $request, Producto $producto)
     {
         try {
+            //return Producto::create($producto);
+
             //dd($request->all());
-            $this->productoService->create($producto, $request->validated());
+            $this->productoService->create($request->validated());
             return redirect()->route('admin.productos.index')
                 ->with('success', 'Producto creado exitosamente');
         } catch (\Exception $e) {

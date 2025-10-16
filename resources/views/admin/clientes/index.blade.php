@@ -19,7 +19,7 @@
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3>Lista de Clientes</h3>
-        <a href="{{ route('admin.usuarios.create') }}" class="btn btn-primary">Crear Cliente</a>
+        <a href="{{ route('admin.clientes.create') }}" class="btn btn-primary">Crear Cliente</a>
     </div>
 
     @if(session('success'))
@@ -56,7 +56,7 @@
                                     @endforeach    
                                 </td>
                                 <td>
-                                    <form action="{{ route('admin.usuarios.toggle-active', $user) }}" method="POST" class="d-inline">
+                                    <form action="{{ route('admin.clientes.toggle-active', $user) }}" method="POST" class="d-inline">
                                         @csrf
                                         <button type="submit" class="btn btn-sm {{ $user->activo ? 'btn-success' : 'btn-danger' }}">
                                             {{ $user->activo ? 'Activo' : 'Inactivo' }}
@@ -64,7 +64,7 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.usuarios.edit', $user) }}" class="btn btn-sm btn-primary">Editar</a>
+                                    <a href="{{ route('admin.clientes.edit', $user) }}" class="btn btn-sm btn-primary">Editar</a>
                                 </td>
                             </tr>
                             @endforeach

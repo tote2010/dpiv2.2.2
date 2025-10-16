@@ -39,6 +39,7 @@ class UserUpdateRequest extends FormRequest
             'lastname.required' => 'El apellido es obligatorio.',
             'lastname.string' => 'Este campo debe contener caracteres solo alfabéticos.',
             'lastname.max' => 'La cantidad máxima de caracteres para este campo es de 100.',
+            'dni.required' => 'El DNI/Pasaporte es obligatorio.',
             'dni.unique' => 'El DNI/Pasaporte ya está registrado en el sistema.',
             'dni.numeric' => 'El DNI/Pasaporte debe contener caracteres solo numéricos.',
             'email.required' => 'El correo electrónico es obligatorio.',
