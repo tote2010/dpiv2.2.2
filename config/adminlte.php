@@ -372,22 +372,6 @@ return [
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-cogs',
         ],
-        ['header' => 'OFFSET'],
-        [
-            'text' => 'Presupuestos',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-thermometer-half',
-        ],
-        [
-            'text' => 'Configuraciones',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-cog',
-        ],
-        [
-            'text' => 'Cotizador Terminaciones',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-cogs',
-        ],
         ['header' => 'ADMINISTRACIÓN'],        
         [
             'text' => 'Clientes',
@@ -434,6 +418,22 @@ return [
             'text' => 'Archivos',
             'url' => 'admin/archivos',
             'icon' => 'fas fa-fw fa-folder-open',
+        ],
+        ['header' => 'OFFSET'],
+        [
+            'text' => 'Presupuestos',
+            'url' => 'admin/settings',
+            'icon' => 'fas fa-fw fa-thermometer-half',
+        ],
+        [
+            'text' => 'Configuraciones',
+            'url' => 'admin/settings',
+            'icon' => 'fas fa-fw fa-cog',
+        ],
+        [
+            'text' => 'Cotizador Terminaciones',
+            'url' => 'admin/settings',
+            'icon' => 'fas fa-fw fa-cogs',
         ],
     ],
 

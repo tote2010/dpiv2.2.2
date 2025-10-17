@@ -49,21 +49,13 @@ class ClienteController extends Controller
 
     public function store(UserStoreRequest $request)
     {
-        //$this->userService->create($request->validated());
-
-        $this->clienteService->create($request-validated());
+        $this->userService->create($request->validated());
+        //$this->clienteService->create($request-validated());
         return redirect()->route('admin.clientes.index')
             ->with('success', 'Cliente creado exitosamente');
     }
 
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $user = User::findOrFail($id);
@@ -72,17 +64,11 @@ class ClienteController extends Controller
         return view('admin.clientes.edit', compact('user', 'rol'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UserUpdateRequest $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //

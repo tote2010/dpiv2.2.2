@@ -38,7 +38,7 @@
                             <th>Email</th>
                             <th>Nombre</th>
                             <th>Apellido</th>
-                            <th>Roles</th>
+                            <th>Rol</th>
                             <th>Estado</th>
                             <th></th>
                         </tr>
