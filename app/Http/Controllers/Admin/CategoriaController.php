@@ -62,6 +62,7 @@ class CategoriaController extends Controller
 
     public function toggleActive(Categoria $categoria)
     {
+        dd($categoria);
         $this->categoriaService->toggleActive($categoria);
         return redirect()->route('admin.categorias.index')
             ->with('success', 'Estado actualizado exitosamente');

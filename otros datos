@@ -1,0 +1,27 @@
+GET|HEAD  admin/productos ............................................................................... admin.productos.index › Admin\ProductoController@index
+  POST      admin/productos ............................................................................... admin.productos.store › Admin\ProductoController@store
+  GET|HEAD  admin/productos/crear ....................................................................... admin.productos.create › Admin\ProductoController@create
+  PUT       admin/productos/{producto} .................................................................. admin.productos.update › Admin\ProductoController@update
+  GET|HEAD  admin/productos/{producto}/editar ............................................................... admin.productos.edit › Admin\ProductoController@edit
+  POST      admin/productos/{producto}/toggle-active ....................................... admin.productos.toggle-active › Admin\ProductoController@toggleActive
+  GET|HEAD  test-productos
+  
+  
+  
+id
+users_id (cliente_id)
+pedidos_id (no recuerdo el por qué jaja, tal vez para los favoritos)	
+productos_id	
+productos_id2	
+productos_id3	
+estados_pedidos_id	
+cantidad	
+tamano (no hace falta, aunque no lo descartaría, pero creo que nunca se usó)
+pliego (esto es solo para offset y solo lo pueden "editar" los roles admin y gestionadores)	
+mediocorte	
+file (acá mezclo un poco idiomas je)	
+detalle	
+precio	
+es_favorito	
+created_at	
+updated_at

@@ -31,7 +31,7 @@
     <div class="card">
         <div class="card-body">
             <div class="">
-                <table id="usuarios" class="table table-striped display responsive nowrap" width="100%"">
+                <table id="usuarios" class="table table-striped display responsive nowrap" width="100%">
                     <thead>
                         <tr>
                             <th>ID</th>

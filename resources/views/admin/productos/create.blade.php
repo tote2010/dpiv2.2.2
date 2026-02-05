@@ -9,6 +9,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">  
 @stop
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
 @section('content')
 <div class="card card-primary">
     <div class="card-header">Crear Producto</div>
@@ -26,7 +37,7 @@
                 <div class="row mb-3">
                     <label for="categoria_id" class="col-sm-2 col-form-label">Categoría *</label>
                     <div class="col-sm-3">
-                        <select class="form-select" id="categoria_id" name="categoria_id">
+                        <select class="form-select" id="categorias_id" name="categorias_id">
                             <option value="">Seleccione una categoría</option>
                             @foreach($categorias as $categoria)
                                 <option value="{{ $categoria->id }}" {{ old('categoria_id') == $categoria->id ? 'selected' : '' }}>

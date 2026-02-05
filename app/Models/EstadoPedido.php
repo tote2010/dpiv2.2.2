@@ -9,6 +9,6 @@ class EstadoPedido extends Model
     // Relaciones
 
     public function pedidos() {
-        return $this->hasMany(Pedido::class);
+        return $this->hasMany(Pedido::class, 'estado_pedidos_id');
     }
 }

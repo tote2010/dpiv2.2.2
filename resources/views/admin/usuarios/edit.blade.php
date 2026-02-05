@@ -132,6 +132,39 @@
                     <div class="col-sm-3"> @error('provincia')<div class="col-form-label text-danger">{{$message}}</div>@enderror </div>
                 </div>
 
+                <div class="row mb-3">
+                    <label for="roles" class="col-sm-2 col-form-label">Rol *</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="roles" name="roles" value="{{old('roles', $user->roles->pluck('name')->first())}}">
+                        <section>
+                            <select name="roles" id="roles" class="form-control">
+                                <option value="">Seleccionar un Rol</option>
+                                @foreach ($roles as $rol)
+                                    <option value="{{ $rol->name }}" {{ (in_array($rol, $user->roles->pluck('name')->toArray())) ? 'selected' : '' }}>
+                                        {{ old("rol") == $rol ? 'selected' : $rol }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="roles" class="col-sm-2 col-form-label">Rol *</label>
+                    <div class="col-sm-2">
+                        {{-- <select name="roles" id="roles" class="form-control" onchange="this.form.submit()"> --}}
+                        <select name="roles" id="roles" class="form-control">
+                            <option value="">Seleccionar un Rol</option>
+                            @foreach ($roles as $rol)
+                                <option value="{{ $rol }}" {{ request('rol_name') == $rol ? 'selected' : '' }}>
+                                    {{ $rol }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-sm-3"> @error('roles')<div class="col-form-label text-danger">{{$message}}</div>@enderror </div>
+                </div>
+
                 <!-- Select para Roles -->
                 <div class="row mb-3">
                     <label for="roles" class="col-sm-2 col-form-label">Rol *</label>
@@ -139,13 +172,13 @@
                         {{-- <select name="roles" id="roles" class="form-control" onchange="this.form.submit()"> --}}
 
 
-                            <select name="rol[]" class="form-control">
+                            {{-- <select name="rol[]" class="form-control">
                                 @foreach ($rol as $value => $label)
                                     <option value="{{ $value }}" {{ isset($userRole[$value]) ? 'selected' : ''}}>
                                         {{ $label->name }}
                                     </option>
                                  @endforeach
-                            </select>
+                            </select> --}}
 
                         {{-- <select name="roles" id="roles" class="form-control">
                              <option value="">

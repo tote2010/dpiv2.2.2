@@ -25,15 +25,17 @@ class Pedido extends Model
     //     $this->belongs_to('estados');
     //     $this->has_many('pedidos_favoritos');
 
+
+    public function estado_pedidos() {
+        return $this->belongsTo(User::class, 'estado_pedidos_id');
+    }
+    
     public function productos() {
-        return $this->belongsTo(Producto::class);
+        return $this->belongsTo(Producto::class, 'usuers_id');
     }
 
     public function users() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'estado_pedidos_id');
     }
 
-    public function estado_pedidos() {
-        return $this->belongsTo(User::class);
-    }
 }

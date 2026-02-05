@@ -10,6 +10,10 @@ use App\Http\Controllers\Admin\PrecioController;
 use App\Http\Controllers\Admin\ValorDolarController;
 use App\Models\ValorDolar;
 
+Route::get('/test-productos', function () {
+    return 'ENTRA A TEST';
+});
+
 Route::get('/', function () {
     //return view('welcome');
     //return view('auth.login');

@@ -13,7 +13,7 @@ class ProductoController extends Controller
 {
     protected $productoService;
 
-    public function __contruct(ProductoService $productoService)
+    public function __construct(ProductoService $productoService)
     {
         $this->productoService = $productoService;
     }
@@ -21,7 +21,6 @@ class ProductoController extends Controller
     public function index()
     {
         $productos = Producto::with('categorias')->get();
-        //$productos = $this->productoService->all();
         return view('admin.productos.index', compact('productos'));
     }
     
@@ -29,20 +28,21 @@ class ProductoController extends Controller
     {
         try
         {
-            $categorias = Categoria::all();
+            $categorias = Categoria::where('activo', 1)->orderBy('nombre')->get();
             return view('admin.productos.create', compact('categorias'));
+
         } catch (\Exception $e) {
+
             return redirect()->route('admin.productos.index')
                 ->with('error', 'Error:' . $e->getMessage());
+
         }
     }
 
     public function store(ProductoStoreRequest $request, Producto $producto)
     {
-        try {
-            //return Producto::create($producto);
-
-            //dd($request->all());
+        try 
+        {
             $this->productoService->create($request->validated());
             return redirect()->route('admin.productos.index')
                 ->with('success', 'Producto creado exitosamente');
@@ -61,18 +61,18 @@ class ProductoController extends Controller
     {
         try {
             $producto = Producto::findOrFail($id);
-            // $categorias = Categoria::all();
-            return view('admin.productos.edit', compact('producto'));
+            $categorias = Categoria::where('activo', 1)->orderBy('nombre')->get();
+            return view('admin.productos.edit', compact('producto', 'categorias'));
         } catch (\Exception $e) {
-            return redirect()->route('admin.productos.index')
+            return redirect()->route('admin.productos.create')
                 ->with('error', 'Error:' . $e->getMessage());
         }
     }
     
     public function update(ProductoUpdateRequest $request, Producto $producto)
     {
-        try {
-            //$producto = Producto::findOrFail($id);
+        try 
+        {
             $this->productoService->update($producto, $request->validated());
             return redirect()->route('admin.productos.index')
                 ->with('success', 'Producto actualizado exitosamente');
@@ -89,7 +89,6 @@ class ProductoController extends Controller
 
     public function toggleActive(Producto $producto)
     {
-        // dd($producto);
         $this->productoService->toggleActive($producto);
         return redirect()->route('admin.productos.index')
             ->with('success', 'Estado actualizado exitosamente');

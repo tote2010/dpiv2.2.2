@@ -15,7 +15,7 @@ class ProductoUpdateRequest extends FormRequest
     {
         return [
             'nombre' => 'required|string|max:100',
-            'categoria_id' => 'required|exists:categorias,id',
+            'categorias_id' => 'required|exists:categorias,id',
             'comentarios' => 'max:255',
         ];
     }
@@ -26,7 +26,7 @@ class ProductoUpdateRequest extends FormRequest
             'nombre.required' => 'El nombre es obligatorio.',
             'nombre.string' => 'Este campo debe contener caracteres solo alfabéticos.',
             'nombre.max' => 'La cantidad máxima de caracteres para este campo es de 100.',
-            'categoria_id.required' => 'La categoría es obligatoria.',
+            'categorias_id.required' => 'La categoría es obligatoria.',
         ];
     }
 }
