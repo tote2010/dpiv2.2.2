@@ -11,9 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categorias', function (Blueprint $table) {
+        Schema::create('precio_adicionales', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', '100')->unique();
+            $table->foreignId('adicional_id')
+                ->constrained('adicionales')
+                ->cascadeOnDelete();
+
+            $table->integer('cantidad_desde');
+            $table->integer('cantidad_hasta');
+            $table->decimal('precio_unitario', 10, 3);
+
             $table->boolean('activo')->default(true);
             $table->timestamps();
         });
@@ -24,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categorias');
+        Schema::dropIfExists('precio_adicionales');
     }
 };

@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\ProductoAdicionalSeeder;
+//use Illuminate\Database\Seeders\ProductoAdicionalSeeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -17,8 +19,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            RoleSeeder::class,
-            UserSeeder::class,
+            //RoleSeeder::class,
+            //UserSeeder::class,
+
+            CategoriaSeeder::class,
+            ProductoSeeder::class,
+            AdicionalSeeder::class,
+
+            ProductoAdicionalSeeder::class,
         ]);
         // User::factory(10)->create();
 
@@ -28,48 +36,48 @@ class DatabaseSeeder extends Seeder
         //     'password' => Hash::make('test'),
         //     'email_verified_at' => now(),
         // ]);
-        
+
         //SQL tablas y datos base
-        
-        $path1 = database_path('sql/precios_cantidad.sql');
-        echo "Looking for SQL file at: $path1\n";
-        if (File::exists($path1)) {
-            DB::unprepared(File::get($path1));
-        } else {
-            throw new \Exception("SQL file not found: $path1");
-        }
 
-        $path2 = database_path('sql/precios.sql');
-        echo "Looking for SQL file at: $path2\n";
-        if (File::exists($path2)) {
-            DB::unprepared(File::get($path2));
-        } else {
-            throw new \Exception("SQL file not found: $path2");
-        }
+        // $path1 = database_path('sql/precios_cantidad.sql');
+        // echo "Looking for SQL file at: $path1\n";
+        // if (File::exists($path1)) {
+        //     DB::unprepared(File::get($path1));
+        // } else {
+        //     throw new \Exception("SQL file not found: $path1");
+        // }
 
-        $path3 = database_path('sql/categorias.sql');
-        echo "Looking for SQL file at: $path3\n";
-        if (File::exists($path3)) {
-            DB::unprepared(File::get($path3));
-        } else {
-            throw new \Exception("SQL file not found: $path3");
-        }
+        // $path2 = database_path('sql/precios.sql');
+        // echo "Looking for SQL file at: $path2\n";
+        // if (File::exists($path2)) {
+        //     DB::unprepared(File::get($path2));
+        // } else {
+        //     throw new \Exception("SQL file not found: $path2");
+        // }
 
-        $path4 = database_path('sql/productos.sql');
-        echo "Looking for SQL file at: $path4\n";
-        if (File::exists($path4)) {
-            DB::unprepared(File::get($path4));
-        } else {
-            throw new \Exception("SQL file not found: $path4");
-        }
+        // $path3 = database_path('sql/categorias.sql');
+        // echo "Looking for SQL file at: $path3\n";
+        // if (File::exists($path3)) {
+        //     DB::unprepared(File::get($path3));
+        // } else {
+        //     throw new \Exception("SQL file not found: $path3");
+        // }
 
-        $path6 = database_path('sql/estado_pedidos.sql');
-        echo "Looking for SQL file at: $path6\n";
-        if (File::exists($path6)) {
-            DB::unprepared(File::get($path6));
-        } else {
-            throw new \Exception("SQL file not found: $path6");
-        }
+        // $path4 = database_path('sql/productos.sql');
+        // echo "Looking for SQL file at: $path4\n";
+        // if (File::exists($path4)) {
+        //     DB::unprepared(File::get($path4));
+        // } else {
+        //     throw new \Exception("SQL file not found: $path4");
+        // }
+
+        // $path6 = database_path('sql/estado_pedidos.sql');
+        // echo "Looking for SQL file at: $path6\n";
+        // if (File::exists($path6)) {
+        //     DB::unprepared(File::get($path6));
+        // } else {
+        //     throw new \Exception("SQL file not found: $path6");
+        // }
 
 
 
@@ -99,5 +107,6 @@ class DatabaseSeeder extends Seeder
         // } else {
         //     throw new \Exception("SQL file not found: $path8");
         // }
+
     }
 }

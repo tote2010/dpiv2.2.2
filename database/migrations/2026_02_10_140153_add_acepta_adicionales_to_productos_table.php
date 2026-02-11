@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('productos', function (Blueprint $table) {
-            //
+            $table->boolean('acepta_adicionales')
+                  ->default(false)
+                  ->after('categoria_id');
         });
     }
 
@@ -22,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('productos', function (Blueprint $table) {
-            //
+            $table->dropColumn('acepta_adicionales');
         });
     }
 };

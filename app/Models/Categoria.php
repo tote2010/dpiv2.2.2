@@ -13,9 +13,13 @@ class Categoria extends Model
 
     protected $fillable = [
         'nombre',
-        'comentarios',
+        'activo',
     ];
 
+    protected $casts = [
+        'activo' => 'boolean',
+    ];
+    
     // Relaciones
 
     public function productos() {
