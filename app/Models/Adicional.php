@@ -32,4 +32,16 @@ class Adicional extends Model
     {
         return $this->hasMany(PrecioAdicional::class);
     }
+
+    public function precioParaCantidad(int $cantidad): ?PrecioAdicional
+    {
+        return $this->precios()
+            ->where('cantidad_desde', '<=', $cantidad)
+            ->where(function ($q) use ($cantidad) {
+                $q->where('cantidad_hasta', '>=', $cantidad)
+                ->orWhereNull('cantidad_hasta');
+            })
+            ->orderBy('cantidad_desde', 'desc')
+            ->first();
+    }
 }

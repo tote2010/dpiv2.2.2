@@ -13,4 +13,10 @@ if (!function_exists('dolar_a_pesos')) {
     {
         return round($valor_dolar * $precio);
     }
+
+}
+
+function money($value)
+{
+    return '$ ' . number_format($value, 3, ',', '.');
 }

@@ -14,7 +14,7 @@ class Producto extends Model
 
     protected $fillable = [
         'nombre',
-        'categorias_id',
+        'categoria_id',
         'acepta_adicionales',
         'comentarios',
         'activo',
@@ -27,8 +27,8 @@ class Producto extends Model
 
     // Relaciones
 
-    public function categoria() {
-        return $this->belongsTo(Categoria::class, 'categorias_id');
+    public function categorias() {
+        return $this->belongsTo(Categoria::class, 'categoria_id');
     }
 
     public function adicionales()
@@ -60,6 +60,18 @@ class Producto extends Model
     public function aceptaAdicionales()
     {
         return $this->acepta_adicionales;
+    }
+
+    public function precioParaCantidad(int $cantidad): ?PrecioProducto
+    {
+        return $this->precios()
+            ->where('cantidad_desde', '<=', $cantidad)
+            ->where(function ($q) use ($cantidad) {
+                $q->where('cantidad_hasta', '>=', $cantidad)
+                ->orWhereNull('cantidad_hasta');
+            })
+            ->orderBy('cantidad_desde', 'desc')
+            ->first();
     }
 
     // public function pedidos() {

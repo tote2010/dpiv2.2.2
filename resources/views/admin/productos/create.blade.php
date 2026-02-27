@@ -1,13 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', ' - Categorías')
+@section('title', ' - Productos')
 
 @section('content_header')
     <h1><b>Productos</b></h1>
 @stop
-@section('css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">  
-@stop
+
 
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -25,47 +23,120 @@
     <div class="card-header">Crear Producto</div>
     <div class="card-body">
         <div class="container">
-            <form action="{{ route('admin.productos.store') }}" method="POST">
-                @csrf                
-                <div class="row mb-3">
-                    <label for="nombre" class="col-sm-2 col-form-label">Nombre *</label>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{old('nombre')}}"> 
-                    </div>
-                    <div class="col-sm-3"> @error('nombre')<div class="col-form-label text-danger">{{$message}}</div>@enderror </div>
+            <form method="POST" action="{{ route('admin.productos.store') }}">
+                @csrf
+                
+                <div class="mb-3">
+                    <label class="form-label">Nombre *</label>
+                    <input type="text"
+                           name="nombre"
+                           class="form-control col-sm-5 @error('nombre') is-invalid @enderror"
+                           value="{{ old('nombre') }}">
+                    @error('nombre')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
-                <div class="row mb-3">
-                    <label for="categoria_id" class="col-sm-2 col-form-label">Categoría *</label>
-                    <div class="col-sm-3">
-                        <select class="form-select" id="categorias_id" name="categorias_id">
-                            <option value="">Seleccione una categoría</option>
-                            @foreach($categorias as $categoria)
-                                <option value="{{ $categoria->id }}" {{ old('categoria_id') == $categoria->id ? 'selected' : '' }}>
-                                    {{ $categoria->nombre }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-sm-3"> @error('categoria_id')<div class=" col-form-label text-danger">{{$message}}</div>@enderror </div>
-                </div> 
-                <div class="row mb-3">
-                    <label for="comentarios" class="col-sm-2 col-form-label">Comentarios</label>
-                    <div class="col-sm-5">
-                        <textarea class="form-control" id="comentarios" name="comentarios" row=3>{{old('comentarios')}}</textarea> 
-                    </div>
-                    <div class="col-sm-3"> @error('comentarios')<div class="col-form-label text-danger">{{$message}}</div>@enderror </div> 
-                </div> 
-                <div class="row mb-3">
-                    <div class="col-sm-10 offset-sm-2">
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                        <a href="{{ route('admin.productos.index') }}" class="btn btn-secondary">Cancelar</a>
-                    </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Categoría *</label>
+                    <select name="categoria_id"
+                            class="form-select col-sm-3 @error('categoria_id') is-invalid @enderror">
+                        <option value="">Seleccione una categoría</option>
+                        @foreach($categorias as $categoria)
+                            <option value="{{ $categoria->id }}"
+                                @selected(old('categoria_id') == $categoria->id)>
+                                {{ $categoria->nombre }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('categoria_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
+                
+                <div class="form-check mb-3">
+                    <input type="checkbox"
+                           id="acepta_adicionales"
+                           data-role="acepta-adicionales"
+                           name="acepta_adicionales"
+                           value="1"
+                           class="form-check-input"
+                           @checked(old('acepta_adicionales'))>
+
+                    <label class="form-check-label"  for="acepta_adicionales">Acepta adicionales</label>
+                </div>
+                
+                <div data-role="bloque-adicionales" class="d-none">
+                    <hr>
+                    <h5>Adicionales permitidos</h5>
+                
+                    @foreach($adicionales as $adicional)
+                        <div class="row align-items-center mb-2">
+                            <div class="col-md-5">
+                                <div class="form-check">
+                                    <input type="checkbox"
+                                        name="adicionales[{{ $adicional->id }}][activo]"
+                                        value="1"
+                                        class="form-check-input"
+                                        id="adicional_{{ $adicional->id }}"
+                                        @checked(old("adicionales.$adicional->id.activo"))>
+                
+                                    <label class="form-check-label" for="adicional_{{ $adicional->id }}">
+                                        {{ $adicional->nombre }}
+                                    </label>
+                                </div>
+                            </div>
+                
+                            <div class="col-md-3">
+                                <select name="adicionales[{{ $adicional->id }}][orden]"
+                                        class="form-select">
+                                    <option value="1" @selected(old("adicionales.$adicional->id.orden") == 1)>Orden 1</option>
+                                    <option value="2" @selected(old("adicionales.$adicional->id.orden") == 2)>Orden 2</option>
+                                </select>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                
+                <div class="form-check mb-3">
+                    <input type="checkbox"
+                           name="activo"
+                           value="1"
+                           class="form-check-input"
+                           id="activo"
+                           @checked(old('activo', true))>
+                    <label class="form-check-label" for="activo">
+                        Producto activo
+                    </label>
+                </div>
+
+                <br>
+
+                <button class="btn btn-primary">Guardar</button>
+                <a href="{{ route('admin.productos.index') }}" class="btn btn-secondary">Cancelar</a>
+                
             </form>
         </div>
     </div>
 </div>
 @stop
-{{-- @section('css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-@stop --}}
+
+@section('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // const checkbox = document.getElementById('acepta_adicionales');
+            // const bloque = document.getElementById('bloque-adicionales');
+
+            const checkbox = document.querySelector('[data-role="acepta-adicionales"]');
+            const bloque   = document.querySelector('[data-role="bloque-adicionales"]');
+
+            function toggleBloque() {
+                bloque.classList.toggle('d-none', !checkbox.checked);
+            }
+
+            checkbox.addEventListener('change', function () {
+                console.log('Checkbox cambiado:', checkbox.checked);
+                console.log('bloque:', bloque);
+            });
+
+            toggleBloque(); // estado inicial
+            checkbox.addEventListener('change', toggleBloque);
+        });
+    </script>
+@endsection

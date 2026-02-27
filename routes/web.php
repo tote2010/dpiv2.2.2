@@ -6,8 +6,11 @@ use App\Http\Controllers\Admin\UsuarioController;
 use App\Http\Controllers\Admin\ClienteController;
 use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\ProductoController;
+use App\Http\Controllers\Admin\AdicionalController;
 use App\Http\Controllers\Admin\PrecioController;
+use App\Http\Controllers\Admin\PrecioAdicionalController;
 use App\Http\Controllers\Admin\ValorDolarController;
+use App\Http\Controllers\Admin\PrecioProductoController;
 use App\Models\ValorDolar;
 
 Route::get('/test-productos', function () {
@@ -78,17 +81,28 @@ Route::middleware([
             Route::post('/{producto}/toggle-active', [ProductoController::class, 'toggleActive'])->name('admin.productos.toggle-active');
         });
 
-        // Rutas de Precios
-        Route::prefix('precios')->group(function () {
-            Route::get('/', [PrecioController::class, 'index'])->name('admin.precios.index');
-            Route::get('/crear', [PrecioController::class, 'create'])->name('admin.precios.create');
-            Route::post('/', [PrecioController::class, 'store'])->name('admin.precios.store');
-            Route::get('/{precio}/editar', [PrecioController::class, 'edit'])->name('admin.precios.edit');
-            Route::put('/{precio}', [PrecioController::class, 'update'])->name('admin.precios.update');
-            Route::post('/{precio}/toggle-active', [PrecioController::class, 'toggleActive'])->name('admin.precios.toggle-active');
-            Route::put('/', [PrecioController::class, 'storeDollarValue'])->name('admin.precios.storeDollarValue');
-
+        // Rutas de Adicionales
+        Route::prefix('adicionales')->group(function () {
+            //Route::get('/', [App\Http\Controllers\Admin\AdicionalController::class, 'index
+            Route::get('/', [AdicionalController::class, 'index'])->name('admin.adicionales.index');
+            Route::get('/crear', [AdicionalController::class, 'create'])->name('admin.adicionales.create');
+            Route::post('/', [AdicionalController::class, 'store'])->name('admin.adicionales.store');
+            Route::get('/{adicional}/editar', [AdicionalController::class, 'edit'])->name('admin.adicionales.edit');
+            Route::put('/{adicional}', [AdicionalController::class, 'update'])->name('admin.adicionales.update');
+            Route::post('/{adicional}/toggle-active', [AdicionalController::class, 'toggleActive'])->name('admin.adicionales.toggle-active');       
         });
+
+        // Rutas de Precios
+        // Route::prefix('precios')->group(function () {
+        //     Route::get('/', [PrecioController::class, 'index'])->name('admin.precios.index');
+        //     Route::get('/crear', [PrecioController::class, 'create'])->name('admin.precios.create');
+        //     Route::post('/', [PrecioController::class, 'store'])->name('admin.precios.store');
+        //     Route::get('/{precio}/editar', [PrecioController::class, 'edit'])->name('admin.precios.edit');
+        //     Route::put('/{precio}', [PrecioController::class, 'update'])->name('admin.precios.update');
+        //     Route::post('/{precio}/toggle-active', [PrecioController::class, 'toggleActive'])->name('admin.precios.toggle-active');
+        //     Route::put('/', [PrecioController::class, 'storeDollarValue'])->name('admin.precios.storeDollarValue');
+
+        // });
         
         Route::prefix('valorDolar')->group(function() {
             Route::get('/', [ValorDolarController::class, 'index'])->name('admin.valorDolar.index');
@@ -98,6 +112,30 @@ Route::middleware([
         //Valor del Dolar
         // Route::post('/valorDolar', [ValorDolar::class, 'store'])->name('admin.valor_dolar');
         //Route::resource('dollar-rates', DollarRateController::class)->only(['index', 'store']);
+
+        Route::prefix('productos/{producto}')
+        ->name('admin.productos.precios.')
+        ->group(function () {
+
+            Route::get('precios',        [PrecioProductoController::class, 'index'])->name('index');
+            Route::get('precios/crear',  [PrecioProductoController::class, 'create'])->name('create');
+            Route::post('precios',       [PrecioProductoController::class, 'store'])->name('store');
+            Route::get('precios/{precio}/editar', [PrecioProductoController::class, 'edit'])->name('edit');
+            Route::put('precios/{precio}',        [PrecioProductoController::class, 'update'])->name('update');
+            Route::delete('precios/{precio}',     [PrecioProductoController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('adicionales/{adicional}')
+        ->name('admin.adicionales.precios.')
+        ->group(function () {
+
+            Route::get('precios',        [PrecioAdicionalController::class, 'index'])->name('index');
+            Route::get('precios/crear',  [PrecioAdicionalController::class, 'create'])->name('create');
+            Route::post('precios',       [PrecioAdicionalController::class, 'store'])->name('store');
+            Route::get('precios/{precio}/editar', [PrecioAdicionalController::class, 'edit'])->name('edit');
+            Route::put('precios/{precio}',        [PrecioAdicionalController::class, 'update'])->name('update');
+            Route::delete('precios/{precio}',     [PrecioAdicionalController::class, 'destroy'])->name('destroy');
+        });
     });
 });
 

@@ -15,6 +15,12 @@ class PrecioAdicional extends Model
         'precio_unitario',
     ];
 
+    protected $casts = [
+        'precio_unitario' => 'decimal:3',
+        'cantidad_desde'  => 'integer',
+        'cantidad_hasta'  => 'integer',
+    ];
+
     public function adicional()
     {
         return $this->belongsTo(Adicional::class);

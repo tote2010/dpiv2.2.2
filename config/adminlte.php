@@ -390,6 +390,11 @@ return [
             'icon' => 'fas fa-fw fa-scroll',
         ],
         [
+            'text' => 'Adicionales',
+            'url' => 'admin/adicionales',
+            'icon' => 'fas fa-fw fa-clone',
+        ],
+        [
             'text' => 'Categorías de Productos',
             'url' => 'admin/categorias',
             'icon' => 'fas fa-fw fa-sitemap',

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Producto;
 use App\Models\Categoria;
+use App\Models\Adicional;
 use App\Services\ProductoService;
 use App\Http\Requests\ProductoStoreRequest;
 use App\Http\Requests\ProductoUpdateRequest;
@@ -20,7 +21,10 @@ class ProductoController extends Controller
 
     public function index()
     {
-        $productos = Producto::with('categorias')->get();
+        $productos = Producto::with('categorias')
+            ->orderBy('nombre')
+            ->get();
+
         return view('admin.productos.index', compact('productos'));
     }
     
@@ -28,8 +32,16 @@ class ProductoController extends Controller
     {
         try
         {
-            $categorias = Categoria::where('activo', 1)->orderBy('nombre')->get();
-            return view('admin.productos.create', compact('categorias'));
+            $categorias = Categoria::where('activo', true)
+                ->orderBy('nombre')
+                ->get();
+            
+            $adicionales = Adicional::where('activo', true)->get();
+            // relaciones existentes (clave: adicional_id)
+            // $productoAdicionales = $producto->adicionales
+            //     ->keyBy('id');
+                
+            return view('admin.productos.create', compact('categorias', 'adicionales'));
 
         } catch (\Exception $e) {
 
@@ -43,9 +55,13 @@ class ProductoController extends Controller
     {
         try 
         {
-            $this->productoService->create($request->validated());
-            return redirect()->route('admin.productos.index')
+            //$this->productoService->create($request->validated());
+            Producto::create($request->validated());
+
+            return redirect()
+                ->route('admin.productos.index')
                 ->with('success', 'Producto creado exitosamente');
+
         } catch (\Exception $e) {
             return redirect()->route('admin.productos.create')
                 ->with('error', 'Error:' . $e->getMessage());
@@ -57,12 +73,29 @@ class ProductoController extends Controller
         //
     }
     
-    public function edit(string $id)
+    //public function edit(string $id)
+    public function edit(Producto $producto)
     {
         try {
-            $producto = Producto::findOrFail($id);
-            $categorias = Categoria::where('activo', 1)->orderBy('nombre')->get();
-            return view('admin.productos.edit', compact('producto', 'categorias'));
+            //$producto = Producto::findOrFail($id);
+            $categorias = Categoria::where('activo', 1)
+                ->orderBy('nombre')
+                ->get();
+
+            $adicionales = Adicional::where('activo', true)
+                ->orderBy('nombre')
+                ->get();
+
+            // relaciones existentes (clave: adicional_id)
+            $productoAdicionales = $producto->adicionales
+                ->keyBy('id');
+                
+            return view('admin.productos.edit', compact(
+                        'producto', 
+                        'categorias', 
+                        'adicionales',
+                        'productoAdicionales'));
+
         } catch (\Exception $e) {
             return redirect()->route('admin.productos.create')
                 ->with('error', 'Error:' . $e->getMessage());
@@ -74,8 +107,30 @@ class ProductoController extends Controller
         try 
         {
             $this->productoService->update($producto, $request->validated());
-            return redirect()->route('admin.productos.index')
+
+            if ($producto->acepta_adicionales) {
+            
+                $adicionalesSync = [];
+
+                foreach ($request->input('adicionales', []) as $id => $data) {
+                    if (isset($data['activo'])) {
+                        $adicionalesSync[$id] = [
+                            'orden' => $data['orden'] ?? 1
+                        ];
+                    }
+                }
+
+                $producto->adicionales()->sync($adicionalesSync);
+
+            } else {
+                // Si deja de aceptar adicionales → limpiamos pivot
+                $producto->adicionales()->detach();
+            }
+
+            return redirect()
+                ->route('admin.productos.index')
                 ->with('success', 'Producto actualizado exitosamente');
+                
         } catch (\Exception $e) {
             return redirect()->route('admin.productos.edit')
                 ->with('error', 'Error:' . $e->getMessage());
@@ -92,5 +147,19 @@ class ProductoController extends Controller
         $this->productoService->toggleActive($producto);
         return redirect()->route('admin.productos.index')
             ->with('success', 'Estado actualizado exitosamente');
+    }
+
+
+    // ANALIZAR ESTE CÓDIGOS Y VER SI SE DEBE MOVER A UN SERVICIO O MODELO
+    public function precioParaCantidad(int $cantidad)
+    {
+        return $this->precios()
+            ->where('cantidad_desde', '<=', $cantidad)
+            ->where(function ($q) use ($cantidad) {
+                $q->where('cantidad_hasta', '>=', $cantidad)
+                ->orWhereNull('cantidad_hasta');
+            })
+            ->orderBy('cantidad_desde', 'desc')
+            ->first();
     }
 }

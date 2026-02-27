@@ -15,6 +15,12 @@ class PrecioProducto extends Model
         'precio_unitario',
     ];
 
+    protected $casts = [
+        'precio_unitario' => 'decimal:3',
+        'cantidad_desde'  => 'integer',
+        'cantidad_hasta'  => 'integer',
+    ];
+
     public function producto()
     {
         return $this->belongsTo(Producto::class);

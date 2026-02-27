@@ -3,7 +3,7 @@
 @section('title', 'Categorías')
 
 @section('content_header')
-    <h1><b>Categorías</b></h1>
+    <h1>Listado de <b>Categorías</b></h1>
 @stop
 
 @section('content')
@@ -14,7 +14,7 @@
     @endif
 
     <div class="d-flex justify-content-between mb-3">
-        <h3>Listado</h3>
+        <h3> </h3>
         <a href="{{ route('admin.categorias.create') }}" class="btn btn-primary">
             Nueva Categoría
         </a>
